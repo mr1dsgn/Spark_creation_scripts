@@ -1,0 +1,20 @@
+sudo apt-get install python-numpy
+#sudo apt-get install python3-numpy
+sudo apt-get install python-six
+#sudo apt-get install python3-six
+sudo apt-get update
+sudo apt-get install -y python-setuptools python-dev
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+wget http://mirrors.ibiblio.org/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+tar xvf apache-maven-3.3.9-bin.tar.gz
+export M2_HOME=$HOME/apache-maven-3.3.9
+export PATH=${M2_HOME}/bin:$PATH
+export MAVEN_OPTS="-Xmx2g -XX:ReservedCodeCacheSize=512m -XX:MaxPermSize=1G"
+git clone https://github.com/intel-analytics/BigDL.git
+bash $HOME/BigDL/make-dist.sh
+export M2=/home/a/apache-maven-3.3.9/bin
+export SPARK_HOME=$HOME/spark
+export BIGDL_HOME=$HOME/BigDL/dist
+bash $HOME/BigDL/dist/bin/python_package.sh
+#test
+$BIGDL_HOME/bin/pyspark-with-bigdl.sh --master local[*]

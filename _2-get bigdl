@@ -1,0 +1,34 @@
+git clone https://github.com/intel-analytics/BigDL.git
+cd /opt
+sudo wget https://www-eu.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
+export M2_HOME=$HOME/apache-maven-3.5.4
+export M2=/home/a/apache-maven-3.3.9/bin
+PATH=$PATH:$HOME/apache-maven-3.5.4/bin
+sudo update-alternatives --install "/usr/bin/mvn" "mvn" "/opt/apache-maven-3.5.4/bin/mvn" 0
+sudo update-alternatives --set mvn /opt/apache-maven-3.5.4/bin/mvn
+sudo wget https://raw.github.com/dimaj/maven-bash-completion/master/bash_completion.bash --output-document /etc/bash_completion.d/mvn
+sudo apt install maven
+mvn --version
+export MAVEN_OPTS="-Xmx2g -XX:ReservedCodeCacheSize=512m"
+bash make-dist.sh
+sudo apt-get install python-numpy
+sudo apt-get install python3-numpy
+sudo apt-get install python-six
+sudo apt-get install python3-six
+sudo apt-get update
+sudo apt-get install -y python-setuptools python-dev
+sudo apt install python-pip
+udo apt install python3-pip
+sudo pip install tensorflow-gpu
+cd $HOME/BigDL/dist/bin/
+sudo apt-get install zip
+sudo apt install virtualenv
+pip install numpy scipy pandas scikit-learn matplotlib seaborn jupyter wordcloud 
+bash python_package.sh
+export VENV_HOME=$HOME/BigDL/dist/bin/venv
+``` BigDL_HOME= SPARK_HOME= PYTHON_API_PATH=${BigDL_HOME}/dist/lib/bigdl-VERSION-python-api.zip BigDL_JAR_PATH=${BigDL_HOME}/dist/lib/bigdl-VERSION-jar-with-dependencies.jar PYTHONPATH=${PYTHON_API_PATH}:$PYTHONPATH VENV_HOME=
+
+PYSPARK_DRIVER_PYTHON=${VENV_HOME}/venv/bin/python PYSPARK_PYTHON=./venv.zip/venv/bin/python ${SPARK_HOME}/bin/spark-submit \ --master yarn \ --deploy-mode client \ --executor-memory 10g \ --driver-memory 10g \ --executor-cores 16 \ --num-executors 2 \ --properties-file ${BigDL_HOME}/dist/conf/spark-bigdl.conf \ --jars ${BigDL_JAR_PATH} \ --py-files ${PYTHON_API_PATH} \ --archives ${VENV_HOME}/venv.zip \ --conf spark.driver.extraClassPath=${BigDL_JAR_PATH} \ --conf spark.executor.extraClassPath=bigdl-VERSION-jar-with-dependencies.jar \ ${BigDL_HOME}/pyspark/bigdl/examples/lenet/lenet.py ```
+
+
+export BIGDL_HOME= $HOME/BigDL/dist

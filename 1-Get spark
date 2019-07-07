@@ -1,0 +1,18 @@
+sudo wget https://www-eu.apache.org/dist/spark/spark-2.3.2/spark-2.3.2-bin-hadoop2.7.tgz
+#remember to clear
+sudo tar xvf spark-2.3.2-bin-hadoop2.7.tgz 
+mv spark-2.3.2-bin-hadoop2.7 spark
+export SPARK_HOME=$HOME/spark
+export PYTHONPATH=$SPARK_HOME/python
+sudo apt-add-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+sudo apt install python
+sudo pip install python-utils
+#export PYSPARK_PYTHON=python3
+wget http://archive.apache.org/dist/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz
+#remember to clear
+tar xvf hadoop-2.7.3.tar.gz
+mv hadoop-2.7.3 hadoop
+export HADOOP_HOME=$HOME/hadoop
+export LD_LIBRARY_PATH=$HADOOP_HOME/lib/native

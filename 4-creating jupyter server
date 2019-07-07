@@ -1,0 +1,2 @@
+sudo apt install jupyter
+$BIGDL_HOME/bin/jupyter-with-bigdl.sh --master local[*]

@@ -1,0 +1,15 @@
+ifconfig
+sudo nano /etc/netplan/50-cloud-init.yaml
+###########################################
+network:
+  version: 2
+  ethernets:
+    enp0s3:
+      dhcp4: no
+      dhcp6: no
+      addresses: [10.0.2.15/24]
+      gateway4: 10.0.2.1
+      nameservers:
+        addresses: [1.1.1.1,1.0.0.1]
+###########################################
+sudo netplan apply
